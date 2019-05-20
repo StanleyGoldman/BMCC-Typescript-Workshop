@@ -1,0 +1,25 @@
+{
+  "name": "console-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build:live",
+    "build": "tsc -p .",
+    "build:live": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^12.0.2",
+    "@types/yargs": "^13.0.0",
+    "nodemon": "^1.19.0",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "yargs": "^13.2.4"
+  }
+}
