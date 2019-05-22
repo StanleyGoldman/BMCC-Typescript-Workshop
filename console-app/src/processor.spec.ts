@@ -1,5 +1,4 @@
 import "mocha";
-
 import { expect } from "chai";
 import { commandProcesor } from "./processor";
 import { exec } from "child_process";
