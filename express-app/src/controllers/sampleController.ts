@@ -1,54 +1,30 @@
-import { Request, Response } from "express";
+import { Request, Response, Router } from "express";
+import { ISampleService } from "../services/ISampleService";
 
-interface ISample {
-    id: number;
-    name: string;
-}
+export function SampleController(sampleService: ISampleService): Router {
+    const routes = Router();
 
-const sampleData: ISample[] = [
-    {
-        id: 1,
-        name: "Sample 1",
-    },
-    {
-        id: 2,
-        name: "Sample 2",
-    },
-    {
-        id: 3,
-        name: "Sample 3",
-    },
-];
-
-
-export interface ISampleService {
-    getAll(): ISample[];
-    getById(id: number): ISample;
-}
-
-export class SampleController {
-    constructor(private sampleService: ISampleService) { }
-
-    // Get all students
-    public getAllSamples(req: Request, res: Response) {
+    routes.get("/", (req: Request, res: Response) => {
         return res.status(200).json({
-            students: this.sampleService.getAll(),
+            students: sampleService.getAll(),
         });
-    }
+    });
 
-    // Get a single student
-    public getSingleStudent(req: Request, res: Response) {
-        const sampleId: string | undefined = req.param("id", undefined);
+    routes.get("/:id", (req: Request, res: Response) => {
+        const sampleId: string | undefined = req.params.id;
+        const sampleIdNumber: number | undefined = sampleId ? parseInt(sampleId, 0) : undefined;
+        const student = sampleIdNumber ? sampleService.getById(sampleIdNumber) : undefined;
 
-        // const findStudent = students.find(student => student.id === parseInt(req.params.id, 10));
-        // if (findStudent) {
-        //     return res.status(200).json({
-        //         student: findStudent,
-        //         message: "A single student record",
-        //     });
-        // }
-        // return res.status(404).json({
-        //     message: "Student record not found",
-        // });
-    }
+        if (student) {
+            return res.status(200).json({
+                student,
+            });
+        }
+
+        return res.status(404).json({
+            message: "Student record not found",
+        });
+    });
+
+    return routes;
 }

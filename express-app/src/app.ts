@@ -1,14 +1,18 @@
-import express = require("express");
+import { Application, Request, Response } from "express";
+import * as express from "express";
+import { SampleController } from "./controllers/sampleController";
+import { SampleService } from "./services/SampleService";
 
-// Create a new express application instance
-const app: express.Application = express();
+const app: Application = express();
 
-app.get("/", (req, res) => {
-    res.send("Hello World!");
+app.use("/api", SampleController(new SampleService()));
+
+const server = app.listen(3000, () => {
+    console.log("App listening on port 3000!");
 });
 
-app.listen(3000, () => {
-    console.log("Example app listening on port 3000!");
-});
+export function stop() {
+    server.close();
+}
 
 export default app;
