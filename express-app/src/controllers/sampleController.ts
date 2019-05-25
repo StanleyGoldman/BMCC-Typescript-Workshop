@@ -22,7 +22,7 @@ export function SampleController(sampleService: ISampleService): Router {
         }
 
         return res.status(404).json({
-            message: "Student record not found",
+            message: "Sample record not found",
         });
     });
 
