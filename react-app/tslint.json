@@ -1,0 +1,11 @@
+{
+    "extends": [
+        "tslint:recommended"
+    ],
+    "rules":{
+        "array-type": false,
+        "eofline": false,
+        "no-console": false,
+        "no-empty": false
+    }
+}
