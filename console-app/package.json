@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build:live",
+    "start": "nodemon",
     "build": "tsc -p .",
-    "build:live": "nodemon",
     "tslint": "tslint -p ./ || true",
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
     "test:watch": "mocha -r ts-node/register -w --extension ts src/**/*.spec.ts"
